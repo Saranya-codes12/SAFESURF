@@ -1,0 +1,290 @@
+/* General Styles */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 8px rgba(255, 204, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+/* Navigation Menu */
+.menu {
+    display: flex;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu ul li {
+    margin: 0 15px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #ffcc00;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu ul li a:hover {
+    color: #ff9900;
+}
+
+/* Menu Toggle (For Mobile) */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 2rem;
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+}
+
+/* Sections */
+section {
+    padding: 20px;
+}
+
+h2 {
+    color: #ffcc00;
+}
+
+/* Comparison Section */
+.comparison {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.comparison img {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+}
+/* News Section */
+#news {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+#news h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+#news-list {
+    list-style: none;
+    padding: 0;
+}
+
+#news-list li {
+    background-color: #222;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 204, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+#news-list li:hover {
+    transform: scale(1.02);
+}
+
+.news-title {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.news-link {
+    text-decoration: none;
+    color: #ffcc00;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.news-link:hover {
+    color: #ff9900;
+}
+/* URL Checker & Report Section */
+.url-checker, #report {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.url-checker h2, #report h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+.url-checker input, #report input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.url-checker input:focus, #report input:focus {
+    box-shadow: 0 0 10px #ffcc00;
+}
+
+.url-checker button, #report button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px;
+    width: 50%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.url-checker button:hover, #report button:hover {
+    background-color: #e6b800;
+}
+
+#result {
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+}
+/* Iframe Section Styling */
+#learn-more {
+    text-align: center;
+    margin: 40px 0;
+}
+
+#learn-more h2 {
+    color: #ffcc00;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+}
+
+iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.iframe-container:hover iframe {
+    transform: scale(1.02);
+}
+
+/* Button to Reload Iframe */
+.reload-btn {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 15px;
+    background-color: #ffcc00;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.reload-btn:hover {
+    background-color: #e6b800;
+}
+
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1f1f1f;
+    color: #ffcc00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #1f1f1f;
+        box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+    }
+
+    .menu ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu ul li {
+        margin: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}

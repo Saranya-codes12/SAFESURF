@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #1e1e1e;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0px 2px 10px rgba(255, 204, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        .back-button {
+            text-decoration: none;
+            color: #ffcc00;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 204, 0, 0.3);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            width: 90%;
+            max-width: 400px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            padding: 15px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        /* Chat Box */
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: thin;
+            scrollbar-color: #ffcc00 #333;
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-box::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #ffcc00;
+            border-radius: 5px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb:hover {
+            background: #e6b800;
+        }
+
+        /* Message Styling */
+        .bot-message, .user-message {
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 75%;
+            display: inline-block;
+            word-wrap: break-word;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bot Message */
+        .bot-message {
+            background: #ffcc00;
+            color: #000;
+            align-self: flex-start;
+        }
+
+        /* User Message */
+        .user-message {
+            background: #333;
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        /* Chat Input */
+        .chat-input {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background: #2a2a2a;
+            color: white;
+        }
+
+        .chat-input button {
+            background-color: #ffcc00;
+            border: none;
+            padding: 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Typing Effect */
+        .typing-effect::after {
+            content: " .";
+            animation: dots 1.2s steps(3, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 100% { content: " ."; }
+            33% { content: " .."; }
+            66% { content: " ..."; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Safe Surf Chatbot 🤖</div>
+    <nav>
+        <ul>
+            <li><a href="login.html" class="back-button">⬅ Back to Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="chat-container">
+    <div class="chat-header">Chatbot</div>
+    <div class="chat-box" id="chatBox">
+        <div class="bot-message">Hello! How can I assist you today?</div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const chatBox = document.getElementById("chatBox");
+        const userInput = document.getElementById("userInput");
+
+        function appendMessage(sender, message, typing = false) {
+            const msgDiv = document.createElement("div");
+            msgDiv.classList.add(sender === "bot" ? "bot-message" : "user-message");
+
+            if (typing) {
+                msgDiv.classList.add("typing-effect");
+                msgDiv.textContent = "bot is typing...";
+            } else {
+                msgDiv.textContent = message;
+            }
+
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return msgDiv;
+        }
+
+        window.sendMessage = function () {
+            const message = userInput.value.trim();
+            if (message === "") return;
+
+            appendMessage("user", message);
+            userInput.value = "";
+
+            const typingIndicator = appendMessage("bot", "", true);
+            setTimeout(() => {
+                typingIndicator.remove();
+                const botResponse = getBotResponse(message);
+                appendMessage("bot", botResponse);
+            }, 1000);
+        };
+
+        window.handleKeyPress = function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        };
+
+        function getBotResponse(message) {
+            const msg = message.toLowerCase();
+
+            if (msg.includes("what is phishing")) {
+                return "Phishing is a cybercrime where attackers trick you into revealing sensitive information like passwords or credit card details.";
+            } else if (msg.includes("types of phishing")) {
+                return "There are several types: Email phishing, Spear phishing, Smishing (SMS), Vishing (Voice), and Clone phishing.";
+            } else if (msg.includes("how to identify") || msg.includes("detect phishing")) {
+                return "Look for suspicious links, bad grammar, urgent messages, or requests for personal info. Always verify the sender.";
+            } else if (msg.includes("how to avoid") || msg.includes("prevent phishing")) {
+                return "Never click unknown links, check URLs carefully, enable spam filters, and use antivirus software.";
+            } else if (msg.includes("what to do if i click") || msg.includes("i clicked on a phishing link")) {
+                return "Immediately disconnect from the internet, run a virus scan, change passwords, and report the attack to your IT team or bank.";
+            } else if (msg.includes("safe website") || msg.includes("is this url safe")) {
+                return "I'm still learning to verify URLs. Please double-check on tools like Google Safe Browsing or VirusTotal.";
+            } else if (msg.includes("examples of phishing")) {
+                return "Example: You get an email from 'Netflix' asking to update payment info, but the link is fake and steals your data.";
+            } else if (msg.includes("report phishing")) {
+                return "You can report phishing to your email provider or visit: https://safety.google/report/phishing";
+            } else if (msg.includes("what is spear phishing")) {
+                return "Spear phishing is a targeted attack aimed at a specific individual or organization, often using personal info to trick you.";
+            } else if (msg === "hi" || msg === "hello") {
+                return "Hello! I'm your phishing awareness assistant. Ask me anything about online safety!";
+            } else if (msg === "bye") {
+                return "Goodbye! Stay safe online! 👋";
+            } else {
+                return "I'm not sure how to respond to that. Try asking about phishing or online safety. 🔐";
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

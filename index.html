@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safe Surf🕵‍♂🔍</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .highlight { color: yellow; }
+    body { background: #121212; color: #ffcc00; font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    h2 { color: #ffcc00; }
+    .myth-fact { background: #1e1e1e; padding: 15px; margin: 10px auto; border-left: 5px solid #ffcc00; width: 80%; text-align: left; border-radius: 5px; }
+    h3 { color: red; }
+    p { color: #fff; }
+    .case-link { display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #3498db; color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer; }
+    .case-link:hover { background-color: #2980b9; }
+    .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); }
+    .modal-content { background-color: #1e1e1e; margin: 10% auto; padding: 20px; border: 1px solid #ffcc00; width: 80%; color: #fff; border-radius: 10px; text-align: left; }
+    .close { color: #ffcc00; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover { color: red; }
+    .news-ticker { background: #ffcc00; color: #000; padding: 5px; font-weight: bold; margin-bottom: 10px; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e1e1e;
+      padding: 10px 20px;
+      border-bottom: 2px solid #ffcc00;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffcc00;
+    }
+
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu-toggle {
+      background: none;
+      color: #ffcc00;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .menu ul {
+        flex-direction: column;
+        background: #1e1e1e;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        display: none;
+      }
+
+      .menu ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="news-ticker">
+    <marquee behavior="scroll" direction="left">
+      🚨 ALERT: Deepfake scams on YouTube! | 📱 Text scams hitting Illinois Tollway users! | 📞 Bank call phishing in action—stay vigilant!
+    </marquee>
+  </div>
+
+  <header>
+    <div class="logo">Safe Surf🕵‍♂🔍💳</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html" class="nav-item">Home</a></li>
+        <li><a href="login.html" class="nav-item">Login</a></li>
+        <li><a href="chatbot.html" class="chat-button">Go to Chatbot</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Stop Phishing, Stay Safe</h1>
+    <img src="phising.jpg" alt="Safe Surf" width="300" height="200" class="responsive-img" />
+    <p>Empowering users to recognize and avoid phishing scams effectively.</p>
+  </section>
+
+  <section id="what-is-phishing">
+    <h2>What is Phishing?</h2>
+    <p>Phishing is a cyber attack where scammers trick users into giving sensitive information by pretending to be legitimate organizations.</p>
+    <span class="case-link" onclick="openModal()">📁 Case Study</span>
+    <section id="security-tools">
+      <h2>Enhance Your Online Security</h2>
+
+      <div class="myth-fact">
+        <h3>🛡 Use a Trusted VPN</h3>
+        <p>VPNs help encrypt your internet connection and keep your online activity private.</p>
+        <a href="https://protonvpn.com/" target="_blank" class="case-link">Click Here for VPN</a>
+      </div>
+
+      <div class="myth-fact">
+        <h3>🦠 Install Antivirus Software</h3>
+        <p>Antivirus software protects your device from malware, spyware, and other threats.</p>
+        <a href="https://www.avast.com/en-in/index" target="_blank" class="case-link">Click Here for Antivirus</a>
+      </div>
+    </section>
+  </section>
+
+  <div id="caseModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>🎯 Real-Life Case Study: Google Docs Phishing Scam</h2>
+      <p><strong>Incident:</strong> In 2017, millions of Gmail users received what looked like a legitimate invitation to edit a Google Doc...</p>
+      <p><strong>Deception:</strong> The link led users to a fake Google login page...</p>
+      <p><strong>Impact:</strong> Over 1 million users were affected within an hour...</p>
+      <p><strong>Lessons Learned:</strong> Always check the sender’s email address and avoid unknown links...</p>
+    </div>
+  </div>
+
+  <section id="learn-more">
+    <h2>Learn More About Phishing</h2>
+    <div class="iframe-container">
+      <iframe id="infoFrame" src="https://www.phishing.org/what-is-phishing" width="100%" height="300" frameborder="0"></iframe>
+    </div>
+    <button class="reload-btn" onclick="reloadIframe()">Reload Page</button>
+
+    <section id="phishing-myths">
+      <h2>Phishing Myths vs. Facts</h2>
+      <div class="myth-fact">
+        <h3>❌ Myth: "Phishing only happens through email."</h3>
+        <p>✅ Fact: Phishing can happen via SMS, phone calls, and fake websites too.</p>
+      </div>
+      <div class="myth-fact">
+        <h3>❌ Myth: "If a website has HTTPS, it's always safe."</h3>
+        <p>✅ Fact: Scammers can also use HTTPS to trick users.</p>
+      </div>
+      <div class="myth-fact">
+        <h3>❌ Myth: "Only non-tech-savvy people fall for phishing scams."</h3>
+        <p>✅ Fact: Even experts and companies have been tricked by sophisticated scams.</p>
+      </div>
+    </section>
+  </section>
+
+  <section id="real-vs-fake">
+    <h2>Real vs. Fake Websites</h2>
+    <div class="comparison">
+      <img src="Screenshot (19).png" width="200" height="200" alt="Real Website" />
+      <img src="Screenshot (20).png" width="200" height="200" alt="Fake Website" />
+    </div>
+    <p>Notice suspicious URLs, spelling errors, and fake security warnings.</p>
+  </section>
+
+  <section id="news">
+    <h2>Phishing News & Alerts</h2>
+    <ul id="news-list"></ul>
+  </section>
+
+  <section class="url-checker">
+    <h2>Check if a URL is Safe</h2>
+    <input type="text" id="urlInput" placeholder="Paste a URL here..." />
+    <button id="check-btn">Check</button>
+    <p id="result"></p>
+    <h3>For additional inquiries, feel free to ask our <span class="highlight">Chatbot</span>.</h3>
+  </section>
+
+  <section id="report">
+    <h2>Report a Phishing Site</h2>
+    <input type="text" id="url" placeholder="Enter suspicious URL" />
+    <button id="report-btn">Submit</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Safe Surf. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const API_KEY = "AIzaSyBPOwA3CdXHRHQuW4VZdsbZA7x7swm74y8"; // Replace with actual key safely on server
+    const newsList = document.getElementById("news-list");
+    const phishingNews = [
+      {
+        title: "YouTube Deepfake Scam",
+        message: "Scammers are using deepfake videos of YouTube CEO Neal Mohan to trick users.",
+        link: "https://youtu.be/YYkrOFfBfog?si=xF2sRPpT4ppDRuKq"
+      },
+      {
+        title: "Illinois Tollway Text Scam",
+        message: "Fake messages claiming unpaid tolls are targeting Illinois residents.",
+        link: "https://youtu.be/EWMYD32QTG4?si=lA0JJ9Ja9EaMZWLj"
+      },
+      {
+        title: "Bank Phone Scam",
+        message: "Scammers posing as bank officials are calling users for personal info.",
+        link: "https://youtu.be/qMj6A0Edlrk?si=YdfdyjTKL6j0yNvS"
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadNews();
+      document.getElementById("check-btn").addEventListener("click", checkURL);
+      document.getElementById("report-btn").addEventListener("click", reportPhishing);
+    });
+
+    function loadNews() {
+      newsList.innerHTML = "";
+      phishingNews.forEach(news => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `<strong>${news.title}</strong>: ${news.message}<br><a href="${news.link}" target="_blank">Watch Video</a>`;
+        newsList.appendChild(listItem);
+      });
+    }
+
+    function checkURL() {
+      const urlInput = document.getElementById("urlInput").value.trim();
+      const resultText = document.getElementById("result");
+
+      if (!urlInput) {
+        resultText.textContent = "Please enter a URL.";
+        resultText.style.color = "red";
+        return;
+      }
+
+      const requestBody = {
+        client: { clientId: "safeSurf", clientVersion: "1.0" },
+        threatInfo: {
+          threatTypes: ["MALWARE", "SOCIAL_ENGINEERING"],
+          platformTypes: ["ANY_PLATFORM"],
+          threatEntryTypes: ["URL"],
+          threatEntries: [{ url: urlInput }]
+        }
+      };
+
+      fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.matches && data.matches.length > 0) {
+          resultText.textContent = "⚠ This URL is NOT safe! It may contain malware or phishing attempts.";
+          resultText.style.color = "red";
+        } else {
+          resultText.textContent = "✅ This URL is safe! No threats detected.";
+          resultText.style.color = "green";
+        }
+      })
+      .catch(error => {
+        console.error("Error checking URL:", error);
+        resultText.textContent = "Error checking URL. Please try again later.";
+        resultText.style.color = "orange";
+      });
+    }
+
+    function reportPhishing() {
+      const reportedURL = document.getElementById("url").value.trim();
+      if (reportedURL) {
+        alert(`Thank you for reporting! The URL "${reportedURL}" will be reviewed.`);
+        document.getElementById("url").value = "";
+      } else {
+        alert("Please enter a URL to report.");
+      }
+    }
+
+    function reloadIframe() {
+      document.getElementById("infoFrame").src += "";
+    }
+
+    function openModal() {
+      document.getElementById("caseModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("caseModal").style.display = "none";
+    }
+
+    function toggleMenu() {
+      const menuList = document.querySelector(".menu ul");
+      menuList.classList.toggle("active");
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("caseModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+</html>
